@@ -1,0 +1,33 @@
+main
+    @include make-center
+    height: 65vh
+    border: 1px dotted purple //remove later
+    justify-content: space-evenly
+    color: $text-colour
+
+    .player, .comp
+        font-size: 1.5rem
+        @include make-center
+        flex-direction: column
+        line-height: 2.5rem
+
+        .title
+            text-decoration: underline wavy
+            text-underline-offset: 5px
+
+    #gameboard
+        display: grid
+        grid-template-columns: repeat(3, 150px)
+        grid-template-rows: repeat(3, 150px)
+        background-color: $gameboard-colour
+        border: 15px ridge $border-colour
+        gap: 1px
+
+        .board_cells
+            outline: 1px solid $line-colour
+            @include make-center
+
+            p
+                position: relative
+                font-size: 8rem
+                bottom: 1rem

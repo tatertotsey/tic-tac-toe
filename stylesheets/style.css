@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&family=Hachi+Maru+Pop&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Hachi Maru Pop", cursive, Sans-serif;
+}
+
+header {
+  color: #6dce9a;
+  font-size: 4rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  border: 1px dotted purple;
+  justify-content: space-evenly;
+  color: #6A3F36;
+}
+main .player, main .comp {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  line-height: 2.5rem;
+}
+main .player .title, main .comp .title {
+  -webkit-text-decoration: underline wavy;
+          text-decoration: underline wavy;
+  text-underline-offset: 5px;
+}
+main #gameboard {
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  grid-template-rows: repeat(3, 150px);
+  background-color: #c29d83;
+  border: 15px ridge #5db3c2;
+  gap: 1px;
+}
+main #gameboard .board_cells {
+  outline: 1px solid #dceef0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main #gameboard .board_cells p {
+  position: relative;
+  font-size: 8rem;
+  bottom: 1rem;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+footer .git-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  color: #6dce9a;
+}
