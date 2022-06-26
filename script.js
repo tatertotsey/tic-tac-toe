@@ -7,7 +7,7 @@ const Player = (sign, isActive, name) => {
   const getName = function () {
     return name;
   };
-  return { getSign, isActive, name };
+  return { getSign, isActive, getName };
 };
 
 // Gameboard as module
@@ -17,7 +17,7 @@ const Gameboard = (() => {
   const cells = document.getElementsByClassName("board_cells");
 
   const createBoard = () => {
-    for (let i = 0; i <= 9; i++) {
+    for (let i = 0; i < 9; i++) {
       const cell = document.createElement("div");
       board.append(cell);
       cell.className = "board_cells";
@@ -31,7 +31,7 @@ const Gameboard = (() => {
       }
     }
   };
-  return { gameboard, createBoard, render };
+  return { gameboard, createBoard, render, board };
 })();
 Gameboard.createBoard();
 
@@ -46,6 +46,7 @@ const displayController = (() => {
         if (cell.innerText == "" && pStatus == true) {
           Gameboard.gameboard[cell.id] = player.getSign();
           Gameboard.render();
+          GameLogic.checkWinner();
           pStatus = false;
         } else {
           pStatus = true;
@@ -53,14 +54,16 @@ const displayController = (() => {
       });
     }
   };
-  return { putSign };
+
+  const reset = () => {};
+  return { cells, putSign };
 })();
 
-// //gamelogic as Factory Function
-const GameLogic = () => {
+// //gamelogic as module
+const GameLogic = (() => {
   //create players here
   const player1 = Player("X", true, "I am X");
-  const player2 = Player("0", false, "I am Y");
+  const player2 = Player("O", false, "I am O");
   displayController.putSign(player1, true);
   displayController.putSign(player2, false);
 
@@ -76,11 +79,60 @@ const GameLogic = () => {
     [6, 7, 8],
   ];
 
-  //check rows
+  //check winner
+  const checkWinner = () => {
+    //get DOM
+    const winnerText = document.getElementById("winnerText");
+    const modal = document.getElementById("modal");
+    const p1Score = document.getElementById("player-score");
+    const p2Score = document.getElementById("comp-score");
+    const restartBtn = document.getElementById("restart");
+    const cells = document.getElementById("gameboard").querySelectorAll("p");
 
-  //put scores
+    winConditions.forEach((condition) => {
+      //map the gameboard, check the indexes
+      const p1Wins = condition.every((r) =>
+        Gameboard.gameboard
+          .map((cel, i) => (cel === "X" ? i : null))
+          .includes(r)
+      );
+      const p2Wins = condition.every((r) =>
+        Gameboard.gameboard
+          .map((cel, i) => (cel === "O" ? i : null))
+          .includes(r)
+      );
 
-  //check game is over
-};
+      if (p1Wins) {
+        winnerText.innerText = "Player1 wins!";
+        modal.style.display = "block";
+        Gameboard.board.style.zIndex = "-1";
+        p1Score.innerText += 1;
+      }
 
-const game = GameLogic();
+      if (p2Wins) {
+        winnerText.innerText = "Player2 wins!";
+        modal.style.display = "block";
+        Gameboard.board.style.zIndex = "-1";
+        p2Score.innerText += 1;
+      }
+      if (Gameboard.gameboard.filter((x) => x == "").length == 0) {
+        winnerText.innerText = "Draw!";
+        modal.style.display = "block";
+        Gameboard.board.style.zIndex = "-1";
+      }
+    });
+
+    restartBtn.onclick = () => {
+      modal.style.display = "none";
+      p1Score.innerText = 0;
+      p2Score.innerText = 0;
+      Gameboard.board.style.zIndex = "1";
+
+      for (let i = 0; i < Gameboard.gameboard.length; i++) {
+        Gameboard.gameboard[i] = "";
+      }
+      Gameboard.render();
+    };
+  };
+  return { checkWinner, winConditions };
+})();
