@@ -1,9 +1,13 @@
-//create players with Factory function
-const Player = (sign, isActive) => {
+//Player Factory function
+const Player = (sign, isActive, name) => {
   const getSign = function () {
     return sign;
   };
-  return { getSign, isActive };
+
+  const getName = function () {
+    return name;
+  };
+  return { getSign, isActive, name };
 };
 
 // Gameboard as module
@@ -29,17 +33,17 @@ const Gameboard = (() => {
   };
   return { gameboard, createBoard, render };
 })();
+Gameboard.createBoard();
 
 //displayController as module
 const displayController = (() => {
-  Gameboard.createBoard();
-
   const cells = document.getElementsByClassName("board_cells");
 
   const putSign = (player, pStatus) => {
     for (const cell of cells) {
       cell.addEventListener("click", () => {
-        if (pStatus == true) {
+        //make sure that other player cannot overwrite the sign of other player
+        if (cell.innerText == "" && pStatus == true) {
           Gameboard.gameboard[cell.id] = player.getSign();
           Gameboard.render();
           pStatus = false;
@@ -52,9 +56,31 @@ const displayController = (() => {
   return { putSign };
 })();
 
-const player1 = Player("X", true);
-const player2 = Player("0", false);
-displayController.putSign(player1, true);
-displayController.putSign(player2, false);
+// //gamelogic as Factory Function
+const GameLogic = () => {
+  //create players here
+  const player1 = Player("X", true, "I am X");
+  const player2 = Player("0", false, "I am Y");
+  displayController.putSign(player1, true);
+  displayController.putSign(player2, false);
 
-//gamelogic needed to stop overwriting on the gameboard
+  //3-in-a-row game
+  const winConditions = [
+    [0, 1, 2],
+    [0, 4, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [2, 4, 6],
+    [3, 4, 5],
+    [6, 7, 8],
+  ];
+
+  //check rows
+
+  //put scores
+
+  //check game is over
+};
+
+const game = GameLogic();
