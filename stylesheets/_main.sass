@@ -1,9 +1,26 @@
+@use '../stylesheets/_variables' as *
+
 main
     @include make-center
     height: 65vh
-    border: 1px dotted purple //remove later
-    justify-content: space-evenly
     color: $text-colour
+    justify-content: space-evenly
+
+    #modal
+        position: absolute
+        font-size: 2rem
+        background-color: $line-colour
+        padding: 10rem
+        border-radius: 15px
+        text-align: center
+        display: none
+        line-height: 4rem
+
+        button
+            padding: 15px
+            border-radius: 15px
+            color: $text-colour
+            border-color: $text-colour
 
     .player, .comp
         font-size: 1.5rem
@@ -22,6 +39,7 @@ main
         background-color: $gameboard-colour
         border: 15px ridge $border-colour
         gap: 1px
+        z-index: 1
 
         .board_cells
             outline: 1px solid $line-colour

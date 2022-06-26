@@ -6,19 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-Tac-Toe</title>
     <link rel="stylesheet" href="stylesheets/style.css" />
+    <script
+      src="https://kit.fontawesome.com/aa23341d39.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js" defer></script>
   </head>
   <body>
     <header>Tic-Tac-Toe</header>
 
     <main>
+      <div id="modal">
+        <div id="winnerText">winnerText</div>
+        <button id="restart">
+          <i class="fa-solid fa-arrow-rotate-right fa-2xl"></i>
+        </button>
+      </div>
+
       <div class="player">
-        <p class="title">Player</p>
+        <p class="title">Player1</p>
         <p id="player-score">0</p>
       </div>
       <div id="gameboard"></div>
       <div class="comp">
-        <p class="title">Computer</p>
+        <p class="title">Player2</p>
         <p id="comp-score">0</p>
       </div>
     </main>

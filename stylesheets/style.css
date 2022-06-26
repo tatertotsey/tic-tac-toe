@@ -11,6 +11,7 @@ header {
   font-size: 4rem;
   text-align: center;
   padding: 1.5rem;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 }
 
 main {
@@ -18,9 +19,24 @@ main {
   justify-content: center;
   align-items: center;
   height: 65vh;
-  border: 1px dotted purple;
-  justify-content: space-evenly;
   color: #6A3F36;
+  justify-content: space-evenly;
+}
+main #modal {
+  position: absolute;
+  font-size: 2rem;
+  background-color: #dceef0;
+  padding: 10rem;
+  border-radius: 15px;
+  text-align: center;
+  display: none;
+  line-height: 4rem;
+}
+main #modal button {
+  padding: 15px;
+  border-radius: 15px;
+  color: #6A3F36;
+  border-color: #6A3F36;
 }
 main .player, main .comp {
   font-size: 1.5rem;
@@ -42,6 +58,7 @@ main #gameboard {
   background-color: #c29d83;
   border: 15px ridge #5db3c2;
   gap: 1px;
+  z-index: 1;
 }
 main #gameboard .board_cells {
   outline: 1px solid #dceef0;
@@ -60,6 +77,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 }
 footer .git-logo {
   display: flex;
